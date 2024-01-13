@@ -1,0 +1,38 @@
+Name:                   web
+Namespace:              default
+CreationTimestamp:      Sat, 13 Jan 2024 08:51:03 +0000
+Labels:                 app=web
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=web
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=web
+  Containers:
+   app-container:
+    Image:        vryzhova03/web:1.0.0
+    Port:         8000/TCP
+    Host Port:    0/TCP
+    Liveness:     exec [curl localhost:8000] delay=3s timeout=1s period=3s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  web-6d856f4867 (0/0 replicas created)
+NewReplicaSet:   web-7776fb8667 (2/2 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  43m    deployment-controller  Scaled up replica set web-6d856f4867 to 2
+  Normal  ScalingReplicaSet  8m20s  deployment-controller  Scaled down replica set web-6d856f4867 to 0 from 2
+  Normal  ScalingReplicaSet  8m15s  deployment-controller  Scaled up replica set web-6d856f4867 to 2 from 0
+  Normal  ScalingReplicaSet  2m14s  deployment-controller  Scaled up replica set web-7776fb8667 to 1
+  Normal  ScalingReplicaSet  2m12s  deployment-controller  Scaled down replica set web-6d856f4867 to 1 from 2
+  Normal  ScalingReplicaSet  2m12s  deployment-controller  Scaled up replica set web-7776fb8667 to 2 from 1
+  Normal  ScalingReplicaSet  2m9s   deployment-controller  Scaled down replica set web-6d856f4867 to 0 from 1

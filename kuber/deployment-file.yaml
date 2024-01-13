@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: app-container
+        image: vryzhova03/web:1.0.0
+        ports:
+        - containerPort: 8000
+        
+        livenessProbe:
+          exec:
+            command:
+              - curl
+              - localhost:8000
+          initialDelaySeconds: 3
+          periodSeconds: 3
