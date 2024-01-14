@@ -16,14 +16,13 @@ spec:
     spec:
       containers:
       - name: app-container
-        image: vryzhova03/web:1.0.0
+        image: vryzhova03/web:1.1.0
         ports:
         - containerPort: 8000
-        
         livenessProbe:
           exec:
             command:
               - curl
               - localhost:8000
-          initialDelaySeconds: 3
-          periodSeconds: 3
+          initialDelaySeconds: 4
+          periodSeconds: 4
